@@ -7,14 +7,20 @@ const typeDescription = document.getElementById('text');
 const amount = document.getElementById('amount');
 const addList = document.getElementById('list');
 
-const dummyTransactions = [
+//the var dummyTransaction was created for memory storage
+/*const dummyTransactions = [
     {id: 1, typeDescription: "Salary", amount: 100000},
     {id:2,  typeDescription: "Savings", amount: -50000},
     {id: 3, typeDescription: "Home purchases", amount: -10000},
     {id:4 , typeDescription: "Eating out", amount: -3000}
-]
+] */
 
-let transactions = dummyTransactions
+//let transactions = dummyTransactions (was used for memory storage with above variable)
+
+const localStorageTransactions = JSON.parse(localStorage.getItem('transactions')) //We use JSON.parse to convert the value to a number since local storage saves information as strings
+
+let transactions = localStorage.getItem('transactions') !==null ? localStorageTransactions : [];  //as long as there is no information in local storage, everything in the app will be at Kshs. 0.00
+
 
 //function to add the transactions input from the input forms
 
@@ -40,6 +46,8 @@ function addTransaction(event){
         addTransactionsDOM(transaction)
 
         updateValues();
+
+        updateLocalStorage();
 
         typeDescription.value = "";
         amount.value = ''
@@ -104,7 +112,15 @@ function updateValues(){
 function removeTransaction(id){
     transactions = transactions.filter(transaction => transaction.id !==id)
 
+    updateLocalStorage()
+
     init()
+}
+
+//update local storage transactions
+
+function updateLocalStorage(){
+    localStorage.setItem('transactions' , JSON.stringify(transactions))
 }
 
 function init(){
