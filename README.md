@@ -19,10 +19,6 @@ To acquire a local copy:
 - Navigate to the parent folder
 - Open the index.html file
 
-### Features to add in the future;
-
--An order basket where the user can order more than one type of pizza and get their total costs
--An option for adding or deleting an order pushed to the basket
 
 ## License
 
